@@ -162,23 +162,23 @@ export default class Server {
     }))
 
     // DX: redirect if router.base in development
-    const routerBase = this.nuxt.options.router.base
-    if (this.options.dev && routerBase !== '/') {
-      this.useMiddleware({
-        prefix: false,
-        handler: (req, res, next) => {
-          if (decodeURI(req.url).startsWith(decodeURI(routerBase))) {
-            return next()
-          }
-          const to = urlJoin(routerBase, req.url)
-          consola.info(`[Development] Redirecting from \`${decodeURI(req.url)}\` to \`${decodeURI(to)}\` (router.base specified)`)
-          res.writeHead(302, {
-            Location: to
-          })
-          res.end()
-        }
-      })
-    }
+//     const routerBase = this.nuxt.options.router.base
+//     if (this.options.dev && routerBase !== '/') {
+//       this.useMiddleware({
+//         prefix: false,
+//         handler: (req, res, next) => {
+//           if (decodeURI(req.url).startsWith(decodeURI(routerBase))) {
+//             return next()
+//           }
+//           const to = urlJoin(routerBase, req.url)
+//           consola.info(`[Development] Redirecting from \`${decodeURI(req.url)}\` to \`${decodeURI(to)}\` (router.base specified)`)
+//           res.writeHead(302, {
+//             Location: to
+//           })
+//           res.end()
+//         }
+//       })
+//     }
 
     // Apply errorMiddleware from modules first
     await this.nuxt.callHook('render:errorMiddleware', this.app)
